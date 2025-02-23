@@ -1,0 +1,21 @@
+{
+  "name": "toquejs",
+  "version": "1.0.0",
+  "description": "A library to get pricing of currency in ElToque",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": ["library", "javascript"],
+  "author": "jleivsuaxy",
+  "license": "MIT",
+  "dependencies": {
+
+  },
+  "devDependencies": {
+
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
