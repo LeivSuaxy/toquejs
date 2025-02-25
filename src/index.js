@@ -23,8 +23,9 @@ export class ToqueJS {
         return await this.#doRequest(filters, today);
     }
 
-    #getTodayScrap(filters=undefined) {
-
+    async #getTodayScrap(filters=undefined) {
+        const scrapper = new Scrapper();
+        return await scrapper.get();
     }
 
     async #doRequest(filters=undefined, date){
@@ -49,6 +50,6 @@ export class ToqueJS {
     }
 
     #doScrap(filters=undefined) {
-
+        // TODO Implement filters and use this function.
     }
 }
