@@ -6,14 +6,16 @@
   "scripts": {
     "test": "echo \"No tests specified\" && exit 0"
   },
-  "keywords": ["library", "javascript"],
+  "keywords": [
+    "library",
+    "javascript",
+    "webscrapping"
+  ],
   "author": "jleivsuaxy",
   "license": "MIT",
   "dependencies": {
-
-  },
-  "devDependencies": {
-
+    "axios": "^1.7.9",
+    "cheerio": "^1.0.0"
   },
   "publishConfig": {
     "access": "public"

@@ -1,5 +1,5 @@
-const https = require('https');
-const { JSDOM } = require('jsdom');
+const axios = require('axios');
+const cheerio = require('cheerio');
 
 export class Scrapper {
     constructor() {
