@@ -12,30 +12,45 @@ export class ToqueJS {
         }
     }
 
-    doRequest(filters=undefined, date){
+    async getToday(filters=undefined) {
+        if(!this.api_key) return this.#getTodayScrap(filters);
+        return await this.#getTodayAPI(filters);
+    }
+
+    async #getTodayAPI(filters=undefined) {
+        const today = new Date().toISOString().split('T')[0];
+        return await this.#doRequest(filters, today);
+    }
+
+    #getTodayScrap(filters=undefined) {
+
+    }
+
+    async #doRequest(filters=undefined, date){
         const url = getUrl(date);
 
-        fetch(url, {
+        return await fetch(url, {
             method: 'GET',
             headers: this.headers
         }).then(response => {
             if (!response.ok) {
-                console.log(response.status);
                 throw new Error('Network response was not ok');
             }
             return response.json();
-        })
-        .then(data => console.log(data))
-        .catch(error => {
-            console.error('Error:', error);
+        }).then(data => {
+            return data.tasas;
+        }).catch(error => {
+            console.log('Error:', error);
             if (error.message.includes('Unexpected token')) {
                 console.error('The response is not valid JSON. Please check the URL or the server response.');
             }
         });
     }
+
+    #doScrap(filters=undefined) {
+
+    }
 }
 
 const test = new ToqueJS('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxMzIxOTkwNiwianRpIjoiNjQ0MzBkYmUtOWNiOC00MzJmLWIxZDctNjRjZWI4YjFmMDVjIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjY1ZjhjMTRkNDVhZjllOGMxOWVlMjgzOCIsIm5iZiI6MTcxMzIxOTkwNiwiZXhwIjoxNzQ0NzU1OTA2fQ.flux2Vjp2QFCKsUXmo6rNWMoSMiw14LgimDdCi6p43U');
-const today = new Date();
-const formattedDate = today.toISOString().split('T')[0];
-test.doRequest(undefined, formattedDate);
+console.log(await test.getToday())
