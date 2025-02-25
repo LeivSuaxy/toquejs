@@ -1,4 +1,5 @@
 import {getUrl} from "./utils/utils.js";
+import { Scrapper } from "./core/scrap.js";
 
 export class ToqueJS {
     constructor(api_key=undefined) {
@@ -51,6 +52,3 @@ export class ToqueJS {
 
     }
 }
-
-const test = new ToqueJS('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxMzIxOTkwNiwianRpIjoiNjQ0MzBkYmUtOWNiOC00MzJmLWIxZDctNjRjZWI4YjFmMDVjIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjY1ZjhjMTRkNDVhZjllOGMxOWVlMjgzOCIsIm5iZiI6MTcxMzIxOTkwNiwiZXhwIjoxNzQ0NzU1OTA2fQ.flux2Vjp2QFCKsUXmo6rNWMoSMiw14LgimDdCi6p43U');
-console.log(await test.getToday())

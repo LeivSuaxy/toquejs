@@ -1,20 +1,43 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
+import axios from 'axios';
+import * as cheerio from 'cheerio';
 
 export class Scrapper {
     constructor() {
         this.url = 'https://www.eltoque.com/'
-        this.headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
-        }
-    }
-
-    async #parse() {
-
     }
 
     async #scrap() {
+        try {
+            const { data } = await axios.get(this.url);
+            const $ = cheerio.load(data);
+            const currencies = [];
+            const prices = [];
 
+            $('span.currency').each((i, elem) => {
+                if (i < 3) {
+                    currencies.push($(elem).text().replace('1 ', ''));
+                }
+            });
+
+            $('span.price-text').each((i, elem) => {
+                if (i < 3) {
+                    prices.push($(elem).text());
+                }
+            });
+
+            const result = {};
+
+            for (let i = 0; i < 3; i++) {
+                result[currencies[i]] = prices[i];
+            }
+
+            return result;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
+    async get() {
+        return this.#scrap();
+    }
 }
